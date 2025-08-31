@@ -1,0 +1,421 @@
+{
+  "name": "Understand LINE Webhook",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "ai-agent"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineWebhook",
+      "typeVersion": 1,
+      "position": [
+        128,
+        176
+      ],
+      "id": "649f2cae-c5ab-484b-8104-317256d00165",
+      "name": "LineWebhook",
+      "webhookId": "561f877b-f71c-4ec4-967a-a4136b63cbf6",
+      "credentials": {
+        "LineMessagingAPIAuth": {
+          "id": "JqbZyxml2a9iJbMM",
+          "name": "LINE Messaging Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.message }}",
+        "replyToken": "={{ $('LineWebhook').item.json.rawEvent.replyToken }}"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessagingAPI",
+      "typeVersion": 1,
+      "position": [
+        2336,
+        368
+      ],
+      "id": "af1a6162-b5f7-406d-a64e-ac444b3286da",
+      "name": "LineMessaging",
+      "credentials": {
+        "LineMessagingAPIAuth": {
+          "id": "JqbZyxml2a9iJbMM",
+          "name": "LINE Messaging Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# LINE Messaging API Webhook\n\nLINE Webhook คือทางเชื่อมที่ LINE ใช้ส่ง Events มาบอก Bot ของเราทันทีเมื่อมีคนทำอะไรกับ Bot เช่น ส่งข้อความ ส่งรูปภาพ วิดีโอ",
+        "height": 1168,
+        "width": 896,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -48,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "af196004-e65a-4237-9f9e-6048d998565e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Transform Message and AI Agent \nรับค่า event เพื่อ สร้าง AI ขึ้นมาช่วยตอบคำถาม",
+        "height": 1168,
+        "width": 704,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        880,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "5b3da586-51d1-406a-ad8d-f28a500b4500",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Response\nBuild LINE Messaging Response คือ ข้อความที่เราตอบกลับผู้ใช้ AI Chatbot ของเรา\n\n",
+        "height": 1168,
+        "width": 944,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1632,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "9fb0a60d-12b4-4b2c-9978-c06984ba05d3",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.rawEvent.message.text }}",
+                    "rightValue": "menu",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "38079df7-f1cc-4b1a-b0d9-1af24ca28f1c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "text=menu"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        960,
+        160
+      ],
+      "id": "75c19884-ceb6-465f-a1bb-92e408169d23",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "flex",
+        "altText": "Menu",
+        "contents": "{\n  \"type\": \"carousel\",\n  \"contents\": [\n    {\n      \"type\": \"bubble\",\n      \"size\": \"micro\",\n      \"hero\": {\n        \"type\": \"image\",\n        \"url\": \"https://developers-resource.landpress.line.me/fx/clip/clip10.jpg\",\n        \"size\": \"full\",\n        \"aspectMode\": \"cover\",\n        \"aspectRatio\": \"320:213\"\n      },\n      \"body\": {\n        \"type\": \"box\",\n        \"layout\": \"vertical\",\n        \"contents\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"Brown Cafe\",\n            \"weight\": \"bold\",\n            \"size\": \"sm\",\n            \"wrap\": true\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"baseline\",\n            \"contents\": [\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png\"\n              },\n              {\n                \"type\": \"text\",\n                \"text\": \"4.0\",\n                \"size\": \"xs\",\n                \"color\": \"#8c8c8c\",\n                \"margin\": \"md\",\n                \"flex\": 0\n              }\n            ]\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"vertical\",\n            \"contents\": [\n              {\n                \"type\": \"box\",\n                \"layout\": \"baseline\",\n                \"spacing\": \"sm\",\n                \"contents\": [\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"東京旅行\",\n                    \"wrap\": true,\n                    \"color\": \"#8c8c8c\",\n                    \"size\": \"xs\",\n                    \"flex\": 5\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"spacing\": \"sm\",\n        \"paddingAll\": \"13px\"\n      }\n    },\n    {\n      \"type\": \"bubble\",\n      \"size\": \"micro\",\n      \"hero\": {\n        \"type\": \"image\",\n        \"url\": \"https://developers-resource.landpress.line.me/fx/clip/clip11.jpg\",\n        \"size\": \"full\",\n        \"aspectMode\": \"cover\",\n        \"aspectRatio\": \"320:213\"\n      },\n      \"body\": {\n        \"type\": \"box\",\n        \"layout\": \"vertical\",\n        \"contents\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"Brown&Cony's Restaurant\",\n            \"weight\": \"bold\",\n            \"size\": \"sm\",\n            \"wrap\": true\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"baseline\",\n            \"contents\": [\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png\"\n              },\n              {\n                \"type\": \"text\",\n                \"text\": \"4.0\",\n                \"size\": \"sm\",\n                \"color\": \"#8c8c8c\",\n                \"margin\": \"md\",\n                \"flex\": 0\n              }\n            ]\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"vertical\",\n            \"contents\": [\n              {\n                \"type\": \"box\",\n                \"layout\": \"baseline\",\n                \"spacing\": \"sm\",\n                \"contents\": [\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"東京旅行\",\n                    \"wrap\": true,\n                    \"color\": \"#8c8c8c\",\n                    \"size\": \"xs\",\n                    \"flex\": 5\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"spacing\": \"sm\",\n        \"paddingAll\": \"13px\"\n      }\n    },\n    {\n      \"type\": \"bubble\",\n      \"size\": \"micro\",\n      \"hero\": {\n        \"type\": \"image\",\n        \"url\": \"https://developers-resource.landpress.line.me/fx/clip/clip12.jpg\",\n        \"size\": \"full\",\n        \"aspectMode\": \"cover\",\n        \"aspectRatio\": \"320:213\"\n      },\n      \"body\": {\n        \"type\": \"box\",\n        \"layout\": \"vertical\",\n        \"contents\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"Tata\",\n            \"weight\": \"bold\",\n            \"size\": \"sm\"\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"baseline\",\n            \"contents\": [\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png\"\n              },\n              {\n                \"type\": \"text\",\n                \"text\": \"4.0\",\n                \"size\": \"sm\",\n                \"color\": \"#8c8c8c\",\n                \"margin\": \"md\",\n                \"flex\": 0\n              }\n            ]\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"vertical\",\n            \"contents\": [\n              {\n                \"type\": \"box\",\n                \"layout\": \"baseline\",\n                \"spacing\": \"sm\",\n                \"contents\": [\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"東京旅行\",\n                    \"wrap\": true,\n                    \"color\": \"#8c8c8c\",\n                    \"size\": \"xs\",\n                    \"flex\": 5\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"spacing\": \"sm\",\n        \"paddingAll\": \"13px\"\n      }\n    }\n  ]\n}"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        208
+      ],
+      "id": "79474376-aa9b-46ee-b1cb-6ed8778c09c9",
+      "name": "LineMessageBuilder - Flex"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.output }}"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        416
+      ],
+      "id": "2d9eb669-26ef-4cb5-b3e6-aed5ef7a42de",
+      "name": "LineMessageBuilder - Text"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.rawEvent.message.text }}",
+        "options": {
+          "systemMessage": "=You are a helpful assistant "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1280,
+        304
+      ],
+      "id": "fce16e97-c4ba-4107-8690-76b96065b4cb",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxOutputTokens": 2048
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1264,
+        528
+      ],
+      "id": "00710384-5915-4625-806c-36b5b84f08e5",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "jMEFQGmje0cOFOV7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.source.userId }}",
+        "contextWindowLength": 200000
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1376,
+        528
+      ],
+      "id": "8555ad6f-4b97-4499-9a8c-21078025ba7e",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "id"
+        },
+        "inputType": "binary",
+        "options": {
+          "maxOutputTokens": 300
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        704
+      ],
+      "id": "dbf07983-93c3-42a8-b27a-4b287aa55c1e",
+      "name": "Analyze image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "jMEFQGmje0cOFOV7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getMessageContent",
+        "messageId": "={{ $json.rawEvent.message.id }}"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessagingAPI",
+      "typeVersion": 1,
+      "position": [
+        944,
+        704
+      ],
+      "id": "9a0e3471-a099-4421-9210-7eacf519e93a",
+      "name": "Get Image Content",
+      "credentials": {
+        "LineMessagingAPIAuth": {
+          "id": "JqbZyxml2a9iJbMM",
+          "name": "LINE Messaging Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.content.parts[0].text }}"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        672
+      ],
+      "id": "732697ac-4aaf-499d-816d-9bd9eb1c3d53",
+      "name": "LineMessageBuilder - Text1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "LineWebhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [],
+        [
+          {
+            "node": "Get Image Content",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        []
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "LineMessageBuilder - Flex",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LineMessageBuilder - Flex": {
+      "main": [
+        [
+          {
+            "node": "LineMessaging",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LineMessageBuilder - Text": {
+      "main": [
+        [
+          {
+            "node": "LineMessaging",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "LineMessageBuilder - Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "LineMessageBuilder - Text1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image Content": {
+      "main": [
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LineMessageBuilder - Text1": {
+      "main": [
+        [
+          {
+            "node": "LineMessaging",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5276cfbc-1439-462e-ac17-0fbb1701da38",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eeeeb37414effd8e3f536eb8bc3254361c63e1ccc41163806f4e745ebfd1bb7f"
+  },
+  "id": "mvBnOl7D6Gp6MphL",
+  "tags": []
+}

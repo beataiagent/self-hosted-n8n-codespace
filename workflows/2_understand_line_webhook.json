@@ -1,0 +1,264 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "ai-agent"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineWebhook",
+      "typeVersion": 1,
+      "position": [
+        128,
+        176
+      ],
+      "id": "649f2cae-c5ab-484b-8104-317256d00165",
+      "name": "LineWebhook",
+      "webhookId": "561f877b-f71c-4ec4-967a-a4136b63cbf6",
+      "credentials": {
+        "LineMessagingAPIAuth": {
+          "id": "JqbZyxml2a9iJbMM",
+          "name": "LINE Messaging Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.message }}",
+        "replyToken": "={{ $('LineWebhook').item.json.rawEvent.replyToken }}"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessagingAPI",
+      "typeVersion": 1,
+      "position": [
+        2336,
+        368
+      ],
+      "id": "af1a6162-b5f7-406d-a64e-ac444b3286da",
+      "name": "LineMessaging",
+      "credentials": {
+        "LineMessagingAPIAuth": {
+          "id": "JqbZyxml2a9iJbMM",
+          "name": "LINE Messaging Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# LINE Messaging API Webhook\n\nLINE Webhook คือทางเชื่อมที่ LINE ใช้ส่ง Events มาบอก Bot ของเราทันทีเมื่อมีคนทำอะไรกับ Bot เช่น ส่งข้อความ ส่งรูปภาพ วิดีโอ",
+        "height": 1168,
+        "width": 896,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -48,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "af196004-e65a-4237-9f9e-6048d998565e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Transform Message and AI Agent \nรับค่า event เพื่อ สร้าง AI ขึ้นมาช่วยตอบคำถาม",
+        "height": 1168,
+        "width": 704,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        880,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "5b3da586-51d1-406a-ad8d-f28a500b4500",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Response\nBuild LINE Messaging Response คือ ข้อความที่เราตอบกลับผู้ใช้ AI Chatbot ของเรา\n\n",
+        "height": 1168,
+        "width": 944,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1632,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "9fb0a60d-12b4-4b2c-9978-c06984ba05d3",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "text": "📋 เมนูอาหารไทย 🍛 เมนูจานเดียว ข้าวกะเพราไก่ไข่ดาว — 55 บาท ข้าวผัดกุ้ง — 60 บาท ข้าวหมูกระเทียม — 50 บาท ข้าวไข่เจียวหมูสับ — 40 บาท ข้าวราดพะแนงหมู — 60 บาท  🍲 กับข้าว ต้มยำกุ้ง — 120 บาท แกงเขียวหวานไก่ — 100 บาท ผัดผักรวมมิตร — 80 บาท ไข่เจียวหมูสับ — 60 บาท ปลาทอดน้ำปลา — 150 บาท  🥗 เมนูสุขภาพ ส้มตำไทย — 45 บาท ยำวุ้นเส้น — 60 บาท ลาบหมู — 70 บาท ต้มจืดเต้าหู้หมูสับ — 70 บาท  🍹 เครื่องดื่ม น้ำเปล่า — 10 บาท น้ำอัดลม (โค้ก/แฟนต้า/สไปร์ท) — 20 บาท ชามะนาวเย็น — 30 บาท น้ำส้มคั้นสด — 35 บาท ชาไทยเย็น — 30 บาท  🍧 ของหวาน ข้าวเหนียวมะม่วง — 60 บาท ลอดช่องน้ำกะทิ — 35 บาท ทับทิมกรอบ — 40 บาท ไอศกรีมกะทิสด — 30 บาท"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        464
+      ],
+      "id": "79474376-aa9b-46ee-b1cb-6ed8778c09c9",
+      "name": "LineMessageBuilder - Text"
+    },
+    {
+      "parameters": {
+        "operation": "image",
+        "originalContentUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s",
+        "previewImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        816
+      ],
+      "id": "067c3393-e976-46fa-81da-10d162b6cbf1",
+      "name": "LineMessageBuilder - Image"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.rawEvent.message.text }}",
+                    "rightValue": "menu",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "38079df7-f1cc-4b1a-b0d9-1af24ca28f1c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "text=menu"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1056,
+        160
+      ],
+      "id": "75c19884-ceb6-465f-a1bb-92e408169d23",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "text": "Thank you for sending Message to me"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        240
+      ],
+      "id": "2d9eb669-26ef-4cb5-b3e6-aed5ef7a42de",
+      "name": "LineMessageBuilder - Text1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "LineWebhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [],
+        [
+          {
+            "node": "LineMessageBuilder - Image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        []
+      ]
+    },
+    "LineMessageBuilder - Text": {
+      "main": [
+        [
+          {
+            "node": "LineMessaging",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LineMessageBuilder - Image": {
+      "main": [
+        [
+          {
+            "node": "LineMessaging",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "LineMessageBuilder - Text",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LineMessageBuilder - Text1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LineMessageBuilder - Text1": {
+      "main": [
+        [
+          {
+            "node": "LineMessaging",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5beec406-8fff-419a-86ae-7999bcd98705",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eeeeb37414effd8e3f536eb8bc3254361c63e1ccc41163806f4e745ebfd1bb7f"
+  },
+  "id": "mvBnOl7D6Gp6MphL",
+  "tags": []
+}

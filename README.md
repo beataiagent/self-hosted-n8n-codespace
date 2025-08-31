@@ -19,7 +19,7 @@
 ใน Terminal ให้รันคำสั่งนี้เพื่อเริ่มต้นระบบ:
 
 ```
-docker compose up -d
+docker compose up
 ```
 จากนั้นคลิก “Ports” → เปิดพอร์ต 5678 (n8n default port) ในเบราว์เซอร์ได้เลย
 

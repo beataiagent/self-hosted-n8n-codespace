@@ -1,22 +1,22 @@
 {
-  "name": "My workflow 3",
+  "name": "LINE Webhook",
   "nodes": [
     {
       "parameters": {
-        "path": "ai-agent"
+        "path": "line"
       },
       "type": "n8n-nodes-line-messaging-api.LineWebhook",
       "typeVersion": 1,
       "position": [
-        128,
-        176
+        432,
+        224
       ],
-      "id": "649f2cae-c5ab-484b-8104-317256d00165",
+      "id": "9853e817-498c-4091-b52e-cd0f9036182a",
       "name": "LineWebhook",
       "webhookId": "561f877b-f71c-4ec4-967a-a4136b63cbf6",
       "credentials": {
         "LineMessagingAPIAuth": {
-          "id": "JqbZyxml2a9iJbMM",
+          "id": "EmGstt7sxqJRa8qO",
           "name": "LINE Messaging Auth account"
         }
       }
@@ -29,14 +29,14 @@
       "type": "n8n-nodes-line-messaging-api.LineMessagingAPI",
       "typeVersion": 1,
       "position": [
-        2336,
+        2096,
         368
       ],
-      "id": "af1a6162-b5f7-406d-a64e-ac444b3286da",
+      "id": "9c512078-4bb0-4ae6-8e3f-e2a41b050882",
       "name": "LineMessaging",
       "credentials": {
         "LineMessagingAPIAuth": {
-          "id": "JqbZyxml2a9iJbMM",
+          "id": "EmGstt7sxqJRa8qO",
           "name": "LINE Messaging Auth account"
         }
       }
@@ -44,78 +44,50 @@
     {
       "parameters": {
         "content": "# LINE Messaging API Webhook\n\nLINE Webhook คือทางเชื่อมที่ LINE ใช้ส่ง Events มาบอก Bot ของเราทันทีเมื่อมีคนทำอะไรกับ Bot เช่น ส่งข้อความ ส่งรูปภาพ วิดีโอ",
-        "height": 1168,
-        "width": 896,
+        "height": 1088,
+        "width": 624,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -48,
+        256,
         0
       ],
       "typeVersion": 1,
-      "id": "af196004-e65a-4237-9f9e-6048d998565e",
+      "id": "028319c8-7e72-4521-a301-166a8068c41e",
       "name": "Sticky Note"
     },
     {
       "parameters": {
-        "content": "# Transform Message and AI Agent \nรับค่า event เพื่อ สร้าง AI ขึ้นมาช่วยตอบคำถาม",
-        "height": 1168,
-        "width": 704,
+        "content": "# Transform Flow ",
+        "height": 1088,
+        "width": 480,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        880,
+        928,
         0
       ],
       "typeVersion": 1,
-      "id": "5b3da586-51d1-406a-ad8d-f28a500b4500",
+      "id": "79261627-03db-499d-b952-43585d33249f",
       "name": "Sticky Note1"
     },
     {
       "parameters": {
         "content": "# Response\nBuild LINE Messaging Response คือ ข้อความที่เราตอบกลับผู้ใช้ AI Chatbot ของเรา\n\n",
-        "height": 1168,
-        "width": 944,
+        "height": 1088,
+        "width": 896,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1632,
+        1440,
         0
       ],
       "typeVersion": 1,
-      "id": "9fb0a60d-12b4-4b2c-9978-c06984ba05d3",
+      "id": "0cb77976-bc71-4041-b6b1-1117823a7bf8",
       "name": "Sticky Note2"
-    },
-    {
-      "parameters": {
-        "text": "📋 เมนูอาหารไทย 🍛 เมนูจานเดียว ข้าวกะเพราไก่ไข่ดาว — 55 บาท ข้าวผัดกุ้ง — 60 บาท ข้าวหมูกระเทียม — 50 บาท ข้าวไข่เจียวหมูสับ — 40 บาท ข้าวราดพะแนงหมู — 60 บาท  🍲 กับข้าว ต้มยำกุ้ง — 120 บาท แกงเขียวหวานไก่ — 100 บาท ผัดผักรวมมิตร — 80 บาท ไข่เจียวหมูสับ — 60 บาท ปลาทอดน้ำปลา — 150 บาท  🥗 เมนูสุขภาพ ส้มตำไทย — 45 บาท ยำวุ้นเส้น — 60 บาท ลาบหมู — 70 บาท ต้มจืดเต้าหู้หมูสับ — 70 บาท  🍹 เครื่องดื่ม น้ำเปล่า — 10 บาท น้ำอัดลม (โค้ก/แฟนต้า/สไปร์ท) — 20 บาท ชามะนาวเย็น — 30 บาท น้ำส้มคั้นสด — 35 บาท ชาไทยเย็น — 30 บาท  🍧 ของหวาน ข้าวเหนียวมะม่วง — 60 บาท ลอดช่องน้ำกะทิ — 35 บาท ทับทิมกรอบ — 40 บาท ไอศกรีมกะทิสด — 30 บาท"
-      },
-      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
-      "typeVersion": 1,
-      "position": [
-        1920,
-        464
-      ],
-      "id": "79474376-aa9b-46ee-b1cb-6ed8778c09c9",
-      "name": "LineMessageBuilder - Text"
-    },
-    {
-      "parameters": {
-        "operation": "image",
-        "originalContentUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s",
-        "previewImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s"
-      },
-      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
-      "typeVersion": 1,
-      "position": [
-        1920,
-        816
-      ],
-      "id": "067c3393-e976-46fa-81da-10d162b6cbf1",
-      "name": "LineMessageBuilder - Image"
     },
     {
       "parameters": {
@@ -154,11 +126,41 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        1056,
+        1104,
         160
       ],
-      "id": "75c19884-ceb6-465f-a1bb-92e408169d23",
+      "id": "685db0ac-7645-4d66-9afd-4f6b0a4a53bd",
       "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "image",
+        "originalContentUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s",
+        "previewImageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9SRRmhH4X5N2e4QalcoxVbzYsD44C-sQv-w&s"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        704
+      ],
+      "id": "32f886d0-115a-4f47-87f9-f1db845f1b15",
+      "name": "Build Image Message"
+    },
+    {
+      "parameters": {
+        "operation": "sticker",
+        "packageId": "446",
+        "stickerId": "1988"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        496
+      ],
+      "id": "4da6b759-1e36-4022-87b8-0c8ceabad542",
+      "name": "Build Sticker Image"
     },
     {
       "parameters": {
@@ -167,11 +169,41 @@
       "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
       "typeVersion": 1,
       "position": [
-        1920,
-        240
+        1680,
+        336
       ],
-      "id": "2d9eb669-26ef-4cb5-b3e6-aed5ef7a42de",
-      "name": "LineMessageBuilder - Text1"
+      "id": "c4306913-a2ee-4d7d-b0e2-b37f0092c4c0",
+      "name": "Build Text Message"
+    },
+    {
+      "parameters": {
+        "text": "📋 เมนูอาหารไทย 🍛 เมนูจานเดียว ข้าวกะเพราไก่ไข่ดาว — 55 บาท ข้าวผัดกุ้ง — 60 บาท ข้าวหมูกระเทียม — 50 บาท ข้าวไข่เจียวหมูสับ — 40 บาท ข้าวราดพะแนงหมู — 60 บาท  🍲 กับข้าว ต้มยำกุ้ง — 120 บาท แกงเขียวหวานไก่ — 100 บาท ผัดผักรวมมิตร — 80 บาท ไข่เจียวหมูสับ — 60 บาท ปลาทอดน้ำปลา — 150 บาท  🥗 เมนูสุขภาพ ส้มตำไทย — 45 บาท ยำวุ้นเส้น — 60 บาท ลาบหมู — 70 บาท ต้มจืดเต้าหู้หมูสับ — 70 บาท  🍹 เครื่องดื่ม น้ำเปล่า — 10 บาท น้ำอัดลม (โค้ก/แฟนต้า/สไปร์ท) — 20 บาท ชามะนาวเย็น — 30 บาท น้ำส้มคั้นสด — 35 บาท ชาไทยเย็น — 30 บาท  🍧 ของหวาน ข้าวเหนียวมะม่วง — 60 บาท ลอดช่องน้ำกะทิ — 35 บาท ทับทิมกรอบ — 40 บาท ไอศกรีมกะทิสด — 30 บาท"
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        160
+      ],
+      "id": "016afbac-3b8e-43ff-8868-034adb5494e2",
+      "name": "Build Text Message Menu"
+    },
+    {
+      "parameters": {
+        "operation": "location",
+        "title": "ร้านป้าติ๋ม",
+        "address": "ร้านป้าติ๋ม ข้างมอ",
+        "latitude": 16.7480589,
+        "longitude": 100.1918917
+      },
+      "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        896
+      ],
+      "id": "5d6f416f-bd8c-4600-9f04-694a33410743",
+      "name": "Build Location Message"
     }
   ],
   "pinData": {},
@@ -186,34 +218,24 @@
           }
         ],
         [],
-        [],
         [
           {
-            "node": "LineMessageBuilder - Image",
+            "node": "Build Sticker Image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Image Message",
             "type": "main",
             "index": 0
           }
         ],
         [],
-        []
-      ]
-    },
-    "LineMessageBuilder - Text": {
-      "main": [
         [
           {
-            "node": "LineMessaging",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "LineMessageBuilder - Image": {
-      "main": [
-        [
-          {
-            "node": "LineMessaging",
+            "node": "Build Location Message",
             "type": "main",
             "index": 0
           }
@@ -224,21 +246,65 @@
       "main": [
         [
           {
-            "node": "LineMessageBuilder - Text",
+            "node": "Build Text Message Menu",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "LineMessageBuilder - Text1",
+            "node": "Build Text Message",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "LineMessageBuilder - Text1": {
+    "Build Image Message": {
+      "main": [
+        [
+          {
+            "node": "LineMessaging",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Sticker Image": {
+      "main": [
+        [
+          {
+            "node": "LineMessaging",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Text Message": {
+      "main": [
+        [
+          {
+            "node": "LineMessaging",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Text Message Menu": {
+      "main": [
+        [
+          {
+            "node": "LineMessaging",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Location Message": {
       "main": [
         [
           {
@@ -254,11 +320,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "5beec406-8fff-419a-86ae-7999bcd98705",
+  "versionId": "ff86e093-e429-4abe-b823-3ffb31e53b58",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "eeeeb37414effd8e3f536eb8bc3254361c63e1ccc41163806f4e745ebfd1bb7f"
+    "instanceId": "e238606eb55c1b14e46c6ef87dc56dbe43d082e5cc6616b4fa0bf5a879726dcc"
   },
-  "id": "mvBnOl7D6Gp6MphL",
+  "id": "vsIrXVdsDFdEX1WA",
   "tags": []
 }

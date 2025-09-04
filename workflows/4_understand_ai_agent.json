@@ -1,0 +1,401 @@
+{
+  "name": "Example AI Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -752,
+        336
+      ],
+      "id": "d02a4970-ed42-47cb-b5be-47f0ca07c1c3",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://storage.googleapis.com/tops-ai-cs-img/ui/ALLOWRIE-AllowrieSaltedButter400g-8850332161151-2.jpg",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -112,
+        -48
+      ],
+      "id": "18ab1aa1-0ec2-4f2a-b9a0-98207f52a9a0",
+      "name": "Get Image"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash"
+        },
+        "text": "From the image extract the ingredient List to JSON",
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        112,
+        -48
+      ],
+      "id": "7618626a-7e73-487e-aa6a-f54b56561167",
+      "name": "Analyze image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EGzTNiOSWtUeIabK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import json\nimport re\n\nitems = []\nfor item in _input.all():\n    raw_text = item.json.get(\"content\", {}).get(\"parts\", [{}])[0].get(\"text\", \"\")\n\n    # remove triple backticks and language hints\n    cleaned = re.sub(r\"^```[a-zA-Z]*\\n?\", \"\", raw_text)\n    cleaned = re.sub(r\"```$\", \"\", cleaned).strip()\n\n    try:\n        parsed = json.loads(cleaned)\n        item.json[\"parsed_json\"] = parsed\n    except Exception as e:\n        item.json[\"parsed_json\"] = {\"error\": str(e), \"raw\": cleaned}\n\n    items.append(item)\n\nreturn item.json[\"parsed_json\"]\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        -48
+      ],
+      "id": "f3b4b27a-ff74-4172-9243-b5b38208b886",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "content": "## Gemini Image Understanding \n",
+        "height": 336,
+        "width": 928
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -464,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "90fdcd26-94d4-4200-8f07-23be1708ac8e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Gemini PDF Understanding \n",
+        "height": 336,
+        "width": 928
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -464,
+        208
+      ],
+      "typeVersion": 1,
+      "id": "0268a02d-7c61-40ae-a46e-5f543fa574f9",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "url": "https://storage.googleapis.com/tops-ai-cs-img/ui/Ingredients%20labelling%20and%20breakdown%20certificate_pfeffernuesse_20250318.pdf",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -240,
+        336
+      ],
+      "id": "792521fe-744b-4a1a-8c24-cfbd7e5f530d",
+      "name": "Get PDF Files"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import json\nimport re\n\nitems = []\nfor item in _input.all():\n    raw_text = item.json.get(\"content\", {}).get(\"parts\", [{}])[0].get(\"text\", \"\")\n\n    # remove triple backticks and language hints\n    cleaned = re.sub(r\"^```[a-zA-Z]*\\n?\", \"\", raw_text)\n    cleaned = re.sub(r\"```$\", \"\", cleaned).strip()\n\n    try:\n        parsed = json.loads(cleaned)\n        item.json[\"parsed_json\"] = parsed\n    except Exception as e:\n        item.json[\"parsed_json\"] = {\"error\": str(e), \"raw\": cleaned}\n\n    items.append(item)\n\nreturn item.json[\"parsed_json\"]\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        336
+      ],
+      "id": "23349bf5-5180-43c1-b886-b19a25383278",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "resource": "document",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "text": "Explain the document and ingredient in JSON \nThe schema should contain\n- Products description\n- Ingredients List",
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        336
+      ],
+      "id": "1835522d-000b-48a8-b3f1-74c3bdec7db6",
+      "name": "Analyze PDF",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EGzTNiOSWtUeIabK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Gemini Image Generation\n",
+        "height": 336,
+        "width": 928
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -464,
+        592
+      ],
+      "typeVersion": 1,
+      "id": "b8c25c32-8397-444d-8c95-9281d3ded09f",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-exp-image-generation",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-exp-image-generation"
+        },
+        "prompt": "A cute and cartoonish red character shaped like the letter \"T\", with big round eyes, a wide smile, and buck teeth. The character is standing on a bright background and hugging a tube of Vaseline lotion (realistic style) with both arms. The lotion tube is red and white, with the Vaseline logo clearly visible. The overall style is playful, clean, and commercial-advertisement-like.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        720
+      ],
+      "id": "f81ddfba-2e6f-4e9b-b141-1d2d2cb9cd6b",
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EGzTNiOSWtUeIabK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hello there, dear! Welcome to our Thai restaurant. I'm Pa Tim, your friendly helper here.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -656,
+        1136
+      ],
+      "id": "8404467e-a1f9-434e-9f0b-9ab73bd1f05a",
+      "name": "When chat message received",
+      "webhookId": "214c9f89-007b-462d-b354-a9219130e836"
+    },
+    {
+      "parameters": {
+        "content": "## Build AI Agent with N8n",
+        "height": 512,
+        "width": 944
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -464,
+        1024
+      ],
+      "typeVersion": 1,
+      "id": "016be4f9-4ef3-44cc-8d24-ede546010471",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "🍲 ป้าติ๋ม – ผู้ช่วยร้านอาหารไทย สามารถพูดคุยได้ 2 ภาษา คือภาษาไทยและอังกฤษ\n    ป้าติ๋มเป็นผู้ช่วยแชตบอตสำหรับร้านอาหารไทยที่สุภาพ อบอุ่น และพร้อมดูแลลูกค้าทุกคนเหมือนญาติค่ะ\n\n📌 หน้าที่ของป้าติ๋ม\n    แนะนำเมนูอาหารไทยทีละหมวดหมู่ (เช่น ข้าวแกง → ก๋วยเตี๋ยว → ตำ/ยำ → เครื่องดื่ม → ของหวาน)\n    พูดคุยอย่างเป็นมิตร เช่น “วันนี้ป้าขอแนะนำแกงเขียวหวานไก่ค่ะ อร่อยเข้มข้นเลยนะ”\n    รับออร์เดอร์อาหารทั้งนั่งทานที่ร้าน เดลิเวอรี่ หรือสั่งกลับบ้าน\n    ช่วยจองโต๊ะล่วงหน้า (ถามวัน เวลา จำนวนคน และเบอร์ติดต่อ)\n    ตอบคำถามเกี่ยวกับเวลาเปิด-ปิด โปรโมชั่น และส่วนผสมในอาหาร\n    สามารถพูดคุยได้ 2 ภาษา คือภาษาไทยและอังกฤษ\n\nถ้าลูกค้าให้ข้อมูลไม่ครบ ป้าติ๋มจะถามต่ออย่างสุภาพค่ะ\n\n🧾 เงื่อนไขการแสดงเมนู\nถ้าลูกค้าพิมพ์ว่า “หิว” หรือ “ขอเมนู” →\nตอบ: “ทางร้านมีอาหารไทยหลายอย่างเลยค่ะ ป้าติ๋มขอเริ่มจากเมนูข้าวแกงก่อนนะคะ 🍛” แล้วแสดงเฉพาะเมนูข้าวแกง\nถ้าลูกค้าพิมพ์ว่า “มีอะไรอีก” หรือ “อยากดูเมนูอื่น ๆ” →\nแสดงหมวดถัดไปตามลำดับ: ข้าวแกง → ก๋วยเตี๋ยว → ตำ/ยำ → เครื่องดื่ม → ของหวาน\nถ้าลูกค้าพิมพ์ชื่อหมวดอาหาร เช่น “อยากกินก๋วยเตี๋ยว” → แสดงเฉพาะเมนูนั้น\n\n🍽 เมนูอาหารไทย\n    🍛 เมนูข้าวแกง\n    ข้าวแกงเขียวหวานไก่ — 60 บาท\n    ข้าวแกงเผ็ดหมู — 55 บาท\n    ข้าวผัดกะเพราหมูสับ — 50 บาท\n    ข้าวผัดกุ้ง — 65 บาท\n🍜 เมนูก๋วยเตี๋ยว\n    ก๋วยเตี๋ยวเรือน้ำตกหมู — 50 บาท\n    ก๋วยเตี๋ยวต้มยำกุ้ง — 60 บาท\n    ก๋วยเตี๋ยวหมูน้ำใส — 45 บาท\n    บะหมี่เกี๊ยวกุ้ง — 65 บาท\n\n🌶 เมนูตำ/ยำ\n    ส้มตำไทย — 45 บาท\n    ส้มตำปูปลาร้า — 50 บาท\n    ยำวุ้นเส้นหมูสับ — 60 บาท\n    ลาบหมู — 65 บาท\n\n🥤 เครื่องดื่ม\n    น้ำอัญชันมะนาว — 25 บาท\n    น้ำเก๊กฮวย — 20 บาท\n    น้ำลำไย — 20 บาท\n    น้ำเปล่า — 10 บาท\n\n🍨 ของหวาน\n    ข้าวเหนียวมะม่วง — 60 บาท\n    ขนมถ้วย — 25 บาท\n    กล้วยบวชชี — 35 บาท\n    ทับทิมกรอบกะทิสด — 40 บาท\n\n🧾 การจองโต๊ะ\nป้าติ๋มจะถามว่า:\n    มากี่ท่านคะ?\n    จะมาวันไหน เวลาใดคะ?\n    ขอชื่อและเบอร์ติดต่อไว้ด้วยค่ะ\n\n🧾 การสั่งอาหาร\nป้าติ๋มจะถามว่า:\n    ขอทราบเมนูและจำนวนที่ต้องการด้วยนะคะ\n    ต้องการมารับเองหรือให้ทางร้านส่งไปให้คะ?\n    ขอชื่อและเบอร์ติดต่อไว้เผื่อมีอะไรเพิ่มเติมค่ะ\n\n💬 ตัวอย่างการปิดท้ายการสนทนา\n    “อยากดูเมนูก๋วยเตี๋ยวต่อไหมคะ?”\n    “สนใจลองส้มตำหรือยำแซ่บ ๆ ไหมคะ?”\n    “ป้าติ๋มมีเมนูเด็ดประจำร้านจะแนะนำให้นะคะ”\n    “จะให้ทางร้านจัดส่งให้เลยไหมคะ?”"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -176,
+        1120
+      ],
+      "id": "1984ff7f-e43b-46bf-b681-00770c4e78b7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        1328
+      ],
+      "id": "0a5feff1-5546-4ffe-9bd2-0377d407b824",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EGzTNiOSWtUeIabK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -112,
+        1344
+      ],
+      "id": "efbdbb6e-c0b5-474b-802c-3a348f39eedc",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Image",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get PDF Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image": {
+      "main": [
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get PDF Files": {
+      "main": [
+        [
+          {
+            "node": "Analyze PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze PDF": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9f30c210-5875-49c4-9cfc-fdaee2e1ce53",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ef93bf5919af7c107b42f42fd90580c5b5bd53e2c5dce7c8506d4a3b83d0eb7b"
+  },
+  "id": "Q8S4sH1wotheKuhj",
+  "tags": []
+}

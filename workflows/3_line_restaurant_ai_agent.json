@@ -1,5 +1,5 @@
 {
-  "name": "LINE AI Agent",
+  "name": "AI Agent Workflow",
   "nodes": [
     {
       "parameters": {
@@ -8,15 +8,15 @@
       "type": "n8n-nodes-line-messaging-api.LineWebhook",
       "typeVersion": 1,
       "position": [
-        496,
+        176,
         240
       ],
-      "id": "6569b0e2-f9eb-410d-9b8a-c5cd5b146169",
+      "id": "177d48d9-0035-4874-a756-19dc8d4d8d47",
       "name": "LineWebhook",
       "webhookId": "561f877b-f71c-4ec4-967a-a4136b63cbf6",
       "credentials": {
         "LineMessagingAPIAuth": {
-          "id": "EmGstt7sxqJRa8qO",
+          "id": "decgjIS19teJyh7O",
           "name": "LINE Messaging Auth account"
         }
       }
@@ -29,14 +29,14 @@
       "type": "n8n-nodes-line-messaging-api.LineMessagingAPI",
       "typeVersion": 1,
       "position": [
-        2032,
+        1712,
         336
       ],
-      "id": "54102db9-bd71-4b6c-b5e8-54da6f6a20c7",
+      "id": "880af653-3f9f-4a2d-a388-16840dad1abe",
       "name": "LineMessaging",
       "credentials": {
         "LineMessagingAPIAuth": {
-          "id": "EmGstt7sxqJRa8qO",
+          "id": "decgjIS19teJyh7O",
           "name": "LINE Messaging Auth account"
         }
       }
@@ -50,11 +50,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        320,
+        0,
         0
       ],
       "typeVersion": 1,
-      "id": "695425e8-df78-42c9-827a-c5d7b6d18aab",
+      "id": "5033a8f9-e513-4b9d-88b0-8c38744dea71",
       "name": "Sticky Note"
     },
     {
@@ -66,11 +66,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        928,
+        608,
         0
       ],
       "typeVersion": 1,
-      "id": "a7513e2a-61e6-418f-b767-eedec1f3e963",
+      "id": "9aa5b75a-0073-479d-9a89-2db84a83aeac",
       "name": "Sticky Note1"
     },
     {
@@ -82,11 +82,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1680,
+        1360,
         0
       ],
       "typeVersion": 1,
-      "id": "88609083-caf3-479a-b1d6-79623b1365e3",
+      "id": "2e4572aa-9fe5-487c-a1b4-1c526c216d8c",
       "name": "Sticky Note2"
     },
     {
@@ -151,10 +151,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        1008,
+        688,
         160
       ],
-      "id": "bab6c477-6270-45c4-8092-d591c988c594",
+      "id": "c3814352-905c-45e9-b8c6-733867d1cc47",
       "name": "Switch"
     },
     {
@@ -162,16 +162,16 @@
         "promptType": "define",
         "text": "={{ $json.rawEvent.message.text }}",
         "options": {
-          "systemMessage": "=🍲 ป้าติ๋ม – ผู้ช่วยร้านอาหารไทย\n    ป้าติ๋มเป็นผู้ช่วยแชตบอตสำหรับร้านอาหารไทยที่สุภาพ อบอุ่น และพร้อมดูแลลูกค้าทุกคนเหมือนญาติค่ะ\n\n📌 หน้าที่ของป้าติ๋ม\n    แนะนำเมนูอาหารไทยทีละหมวดหมู่ (เช่น ข้าวแกง → ก๋วยเตี๋ยว → ตำ/ยำ → เครื่องดื่ม → ของหวาน)\n    พูดคุยอย่างเป็นมิตร เช่น “วันนี้ป้าขอแนะนำแกงเขียวหวานไก่ค่ะ อร่อยเข้มข้นเลยนะ”\n    รับออร์เดอร์อาหารทั้งนั่งทานที่ร้าน เดลิเวอรี่ หรือสั่งกลับบ้าน\n    ช่วยจองโต๊ะล่วงหน้า (ถามวัน เวลา จำนวนคน และเบอร์ติดต่อ)\n    ตอบคำถามเกี่ยวกับเวลาเปิด-ปิด โปรโมชั่น และส่วนผสมในอาหาร\n    พูดคุยกับลูกค้าเป็นภาษาไทยเท่านั้น\n\nถ้าลูกค้าให้ข้อมูลไม่ครบ ป้าติ๋มจะถามต่ออย่างสุภาพค่ะ\n\n🧾 เงื่อนไขการแสดงเมนู\nถ้าลูกค้าพิมพ์ว่า “หิว” หรือ “ขอเมนู” →\nตอบ: “ทางร้านมีอาหารไทยหลายอย่างเลยค่ะ ป้าติ๋มขอเริ่มจากเมนูข้าวแกงก่อนนะคะ 🍛” แล้วแสดงเฉพาะเมนูข้าวแกง\nถ้าลูกค้าพิมพ์ว่า “มีอะไรอีก” หรือ “อยากดูเมนูอื่น ๆ” →\nแสดงหมวดถัดไปตามลำดับ: ข้าวแกง → ก๋วยเตี๋ยว → ตำ/ยำ → เครื่องดื่ม → ของหวาน\nถ้าลูกค้าพิมพ์ชื่อหมวดอาหาร เช่น “อยากกินก๋วยเตี๋ยว” → แสดงเฉพาะเมนูนั้น\n\n🍽 เมนูอาหารไทย\n    🍛 เมนูข้าวแกง\n    ข้าวแกงเขียวหวานไก่ — 60 บาท\n    ข้าวแกงเผ็ดหมู — 55 บาท\n    ข้าวผัดกะเพราหมูสับ — 50 บาท\n    ข้าวผัดกุ้ง — 65 บาท\n🍜 เมนูก๋วยเตี๋ยว\n    ก๋วยเตี๋ยวเรือน้ำตกหมู — 50 บาท\n    ก๋วยเตี๋ยวต้มยำกุ้ง — 60 บาท\n    ก๋วยเตี๋ยวหมูน้ำใส — 45 บาท\n    บะหมี่เกี๊ยวกุ้ง — 65 บาท\n\n🌶 เมนูตำ/ยำ\n    ส้มตำไทย — 45 บาท\n    ส้มตำปูปลาร้า — 50 บาท\n    ยำวุ้นเส้นหมูสับ — 60 บาท\n    ลาบหมู — 65 บาท\n\n🥤 เครื่องดื่ม\n    น้ำอัญชันมะนาว — 25 บาท\n    น้ำเก๊กฮวย — 20 บาท\n    น้ำลำไย — 20 บาท\n    น้ำเปล่า — 10 บาท\n\n🍨 ของหวาน\n    ข้าวเหนียวมะม่วง — 60 บาท\n    ขนมถ้วย — 25 บาท\n    กล้วยบวชชี — 35 บาท\n    ทับทิมกรอบกะทิสด — 40 บาท\n\n🧾 การจองโต๊ะ\nป้าติ๋มจะถามว่า:\n    มากี่ท่านคะ?\n    จะมาวันไหน เวลาใดคะ?\n    ขอชื่อและเบอร์ติดต่อไว้ด้วยค่ะ\n\n🧾 การสั่งอาหาร\nป้าติ๋มจะถามว่า:\n    ขอทราบเมนูและจำนวนที่ต้องการด้วยนะคะ\n    ต้องการมารับเองหรือให้ทางร้านส่งไปให้คะ?\n    ขอชื่อและเบอร์ติดต่อไว้เผื่อมีอะไรเพิ่มเติมค่ะ\n\n💬 ตัวอย่างการปิดท้ายการสนทนา\n    “อยากดูเมนูก๋วยเตี๋ยวต่อไหมคะ?”\n    “สนใจลองส้มตำหรือยำแซ่บ ๆ ไหมคะ?”\n    “ป้าติ๋มมีเมนูเด็ดประจำร้านจะแนะนำให้นะคะ”\n    “จะให้ทางร้านจัดส่งให้เลยไหมคะ?”"
+          "systemMessage": "=You are AI personal Assitance "
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        1328,
+        1008,
         304
       ],
-      "id": "da9206ee-403c-4956-818c-9c4d5d9c91dd",
+      "id": "9330ba1b-bd05-47b2-98eb-ece43cc580ef",
       "name": "AI Agent"
     },
     {
@@ -183,14 +183,14 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        1296,
+        976,
         528
       ],
-      "id": "f58e3a5b-e229-4337-9be7-77b7a0a39cc4",
+      "id": "7f332822-b55f-4d59-95d4-afd754b2251c",
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
-          "id": "JcKtJEgtmsvR7W5h",
+          "id": "zc2OHpLE5pswrsI8",
           "name": "Google Gemini(PaLM) Api account"
         }
       }
@@ -204,10 +204,10 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        1424,
+        1104,
         528
       ],
-      "id": "0ccdf8f8-a19d-4a6b-aeb8-b6e99f23346f",
+      "id": "e4aa6e55-6fe7-4ff0-8ebb-01ebd886dfea",
       "name": "Simple Memory"
     },
     {
@@ -227,14 +227,14 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        1168,
+        848,
         704
       ],
-      "id": "25f1e04d-2cb6-4846-889d-91fc0bb19144",
+      "id": "c5983eca-4d58-4f73-acac-110e962eb8f5",
       "name": "Analyze image",
       "credentials": {
         "googlePalmApi": {
-          "id": "JcKtJEgtmsvR7W5h",
+          "id": "zc2OHpLE5pswrsI8",
           "name": "Google Gemini(PaLM) Api account"
         }
       }
@@ -247,14 +247,14 @@
       "type": "n8n-nodes-line-messaging-api.LineMessagingAPI",
       "typeVersion": 1,
       "position": [
-        992,
+        672,
         704
       ],
-      "id": "8fec6ead-e304-406d-8ae3-f272f6d61568",
+      "id": "5c948b9f-53b5-4546-8c0a-46badf9c90de",
       "name": "Get Image Content",
       "credentials": {
         "LineMessagingAPIAuth": {
-          "id": "EmGstt7sxqJRa8qO",
+          "id": "decgjIS19teJyh7O",
           "name": "LINE Messaging Auth account"
         }
       }
@@ -263,15 +263,15 @@
       "parameters": {
         "operation": "flex",
         "altText": "Menu",
-        "contents": "{\n  \"type\": \"carousel\",\n  \"contents\": [\n    {\n      \"type\": \"bubble\",\n      \"size\": \"micro\",\n      \"hero\": {\n        \"type\": \"image\",\n        \"url\": \"https://developers-resource.landpress.line.me/fx/clip/clip10.jpg\",\n        \"size\": \"full\",\n        \"aspectMode\": \"cover\",\n        \"aspectRatio\": \"320:213\"\n      },\n      \"body\": {\n        \"type\": \"box\",\n        \"layout\": \"vertical\",\n        \"contents\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"Brown Cafe\",\n            \"weight\": \"bold\",\n            \"size\": \"sm\",\n            \"wrap\": true\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"baseline\",\n            \"contents\": [\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png\"\n              },\n              {\n                \"type\": \"text\",\n                \"text\": \"4.0\",\n                \"size\": \"xs\",\n                \"color\": \"#8c8c8c\",\n                \"margin\": \"md\",\n                \"flex\": 0\n              }\n            ]\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"vertical\",\n            \"contents\": [\n              {\n                \"type\": \"box\",\n                \"layout\": \"baseline\",\n                \"spacing\": \"sm\",\n                \"contents\": [\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"東京旅行\",\n                    \"wrap\": true,\n                    \"color\": \"#8c8c8c\",\n                    \"size\": \"xs\",\n                    \"flex\": 5\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"spacing\": \"sm\",\n        \"paddingAll\": \"13px\"\n      }\n    },\n    {\n      \"type\": \"bubble\",\n      \"size\": \"micro\",\n      \"hero\": {\n        \"type\": \"image\",\n        \"url\": \"https://developers-resource.landpress.line.me/fx/clip/clip11.jpg\",\n        \"size\": \"full\",\n        \"aspectMode\": \"cover\",\n        \"aspectRatio\": \"320:213\"\n      },\n      \"body\": {\n        \"type\": \"box\",\n        \"layout\": \"vertical\",\n        \"contents\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"Brown&Cony's Restaurant\",\n            \"weight\": \"bold\",\n            \"size\": \"sm\",\n            \"wrap\": true\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"baseline\",\n            \"contents\": [\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png\"\n              },\n              {\n                \"type\": \"text\",\n                \"text\": \"4.0\",\n                \"size\": \"sm\",\n                \"color\": \"#8c8c8c\",\n                \"margin\": \"md\",\n                \"flex\": 0\n              }\n            ]\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"vertical\",\n            \"contents\": [\n              {\n                \"type\": \"box\",\n                \"layout\": \"baseline\",\n                \"spacing\": \"sm\",\n                \"contents\": [\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"東京旅行\",\n                    \"wrap\": true,\n                    \"color\": \"#8c8c8c\",\n                    \"size\": \"xs\",\n                    \"flex\": 5\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"spacing\": \"sm\",\n        \"paddingAll\": \"13px\"\n      }\n    },\n    {\n      \"type\": \"bubble\",\n      \"size\": \"micro\",\n      \"hero\": {\n        \"type\": \"image\",\n        \"url\": \"https://developers-resource.landpress.line.me/fx/clip/clip12.jpg\",\n        \"size\": \"full\",\n        \"aspectMode\": \"cover\",\n        \"aspectRatio\": \"320:213\"\n      },\n      \"body\": {\n        \"type\": \"box\",\n        \"layout\": \"vertical\",\n        \"contents\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"Tata\",\n            \"weight\": \"bold\",\n            \"size\": \"sm\"\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"baseline\",\n            \"contents\": [\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png\"\n              },\n              {\n                \"type\": \"icon\",\n                \"size\": \"xs\",\n                \"url\": \"https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png\"\n              },\n              {\n                \"type\": \"text\",\n                \"text\": \"4.0\",\n                \"size\": \"sm\",\n                \"color\": \"#8c8c8c\",\n                \"margin\": \"md\",\n                \"flex\": 0\n              }\n            ]\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"vertical\",\n            \"contents\": [\n              {\n                \"type\": \"box\",\n                \"layout\": \"baseline\",\n                \"spacing\": \"sm\",\n                \"contents\": [\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"東京旅行\",\n                    \"wrap\": true,\n                    \"color\": \"#8c8c8c\",\n                    \"size\": \"xs\",\n                    \"flex\": 5\n                  }\n                ]\n              }\n            ]\n          }\n        ],\n        \"spacing\": \"sm\",\n        \"paddingAll\": \"13px\"\n      }\n    }\n  ]\n}"
+        "contents": "{\n  \"type\": \"bubble\",\n  \"header\": {\n    \"type\": \"box\",\n    \"layout\": \"horizontal\",\n    \"contents\": [\n      {\n        \"type\": \"box\",\n        \"layout\": \"vertical\",\n        \"contents\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"Gemini's Kitchen\",\n            \"color\": \"#ffffff\",\n            \"size\": \"xl\",\n            \"weight\": \"bold\",\n            \"style\": \"normal\",\n            \"decoration\": \"none\"\n          },\n          {\n            \"type\": \"text\",\n            \"text\": \"เมนูอร่อย ส่งตรงถึงบ้านคุณ\",\n            \"color\": \"#ffffffcc\",\n            \"size\": \"sm\"\n          }\n        ],\n        \"flex\": 3\n      },\n      {\n        \"type\": \"box\",\n        \"layout\": \"vertical\",\n        \"contents\": [\n          {\n            \"type\": \"image\",\n            \"url\": \"https://images.icon-icons.com/1151/PNG/512/1486505264-food-fork-kitchen-knife-meanns-restaurant_81404.png\",\n            \"align\": \"end\",\n            \"size\": \"xs\",\n            \"aspectRatio\": \"1:1\"\n          }\n        ]\n      }\n    ],\n    \"paddingAll\": \"20px\",\n    \"background\": {\n      \"type\": \"linearGradient\",\n      \"angle\": \"0deg\",\n      \"endColor\": \"#005c97\",\n      \"startColor\": \"#363795\"\n    },\n    \"alignItems\": \"center\"\n  },\n  \"body\": {\n    \"type\": \"box\",\n    \"layout\": \"vertical\",\n    \"contents\": [\n      {\n        \"type\": \"text\",\n        \"text\": \"เมนูแนะนำวันนี้\",\n        \"weight\": \"bold\",\n        \"size\": \"lg\"\n      },\n      {\n        \"type\": \"box\",\n        \"layout\": \"vertical\",\n        \"margin\": \"lg\",\n        \"spacing\": \"md\",\n        \"contents\": [\n          {\n            \"type\": \"box\",\n            \"layout\": \"horizontal\",\n            \"spacing\": \"lg\",\n            \"contents\": [\n              {\n                \"type\": \"image\",\n                \"url\": \"https://www.maggi.co.th/sites/default/files/styles/home_stage_1500_700/public/srh_recipes/6b0473cc1841f2157e29700a56a5b8f0.jpg?h=e13068ac&itok=rBSnUiHj\",\n                \"aspectMode\": \"cover\",\n                \"aspectRatio\": \"16:9\",\n                \"size\": \"xxl\",\n                \"flex\": 2\n              },\n              {\n                \"type\": \"box\",\n                \"layout\": \"vertical\",\n                \"contents\": [\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"ข้าวกะเพราหมูสับ\",\n                    \"weight\": \"bold\",\n                    \"size\": \"md\"\n                  },\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"฿60\",\n                    \"size\": \"sm\",\n                    \"color\": \"#888888\",\n                    \"margin\": \"sm\"\n                  }\n                ],\n                \"flex\": 3\n              }\n            ]\n          },\n          {\n            \"type\": \"separator\"\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"horizontal\",\n            \"spacing\": \"lg\",\n            \"contents\": [\n              {\n                \"type\": \"image\",\n                \"url\": \"https://www.maggi.co.th/sites/default/files/styles/home_stage_1500_700/public/srh_recipes/6b0473cc1841f2157e29700a56a5b8f0.jpg?h=e13068ac&itok=rBSnUiHj\",\n                \"aspectMode\": \"cover\",\n                \"aspectRatio\": \"16:9\",\n                \"size\": \"xxl\",\n                \"flex\": 2\n              },\n              {\n                \"type\": \"box\",\n                \"layout\": \"vertical\",\n                \"contents\": [\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"ข้าวกะเพราหมูสับ\",\n                    \"weight\": \"bold\",\n                    \"size\": \"md\"\n                  },\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"฿60\",\n                    \"size\": \"sm\",\n                    \"color\": \"#888888\",\n                    \"margin\": \"sm\"\n                  }\n                ],\n                \"flex\": 3\n              }\n            ]\n          },\n          {\n            \"type\": \"separator\"\n          },\n          {\n            \"type\": \"box\",\n            \"layout\": \"horizontal\",\n            \"spacing\": \"lg\",\n            \"contents\": [\n              {\n                \"type\": \"image\",\n                \"url\": \"https://www.maggi.co.th/sites/default/files/styles/home_stage_1500_700/public/srh_recipes/6b0473cc1841f2157e29700a56a5b8f0.jpg?h=e13068ac&itok=rBSnUiHj\",\n                \"aspectMode\": \"cover\",\n                \"aspectRatio\": \"16:9\",\n                \"size\": \"xxl\",\n                \"flex\": 2\n              },\n              {\n                \"type\": \"box\",\n                \"layout\": \"vertical\",\n                \"contents\": [\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"ข้าวกะเพราหมูสับ\",\n                    \"weight\": \"bold\",\n                    \"size\": \"md\"\n                  },\n                  {\n                    \"type\": \"text\",\n                    \"text\": \"฿60\",\n                    \"size\": \"sm\",\n                    \"color\": \"#888888\",\n                    \"margin\": \"sm\"\n                  }\n                ],\n                \"flex\": 3\n              }\n            ]\n          }\n        ]\n      }\n    ],\n    \"paddingAll\": \"xl\"\n  },\n  \"footer\": {\n    \"type\": \"box\",\n    \"layout\": \"horizontal\",\n    \"spacing\": \"sm\",\n    \"contents\": [\n      {\n        \"type\": \"button\",\n        \"style\": \"secondary\",\n        \"height\": \"sm\",\n        \"action\": {\n          \"type\": \"uri\",\n          \"label\": \"ดูเมนูทั้งหมด\",\n          \"uri\": \"https://example.com/full-menu\"\n        }\n      },\n      {\n        \"type\": \"button\",\n        \"style\": \"primary\",\n        \"height\": \"sm\",\n        \"action\": {\n          \"type\": \"uri\",\n          \"label\": \"สั่งเลย!\",\n          \"uri\": \"https://example.com/order\"\n        },\n        \"color\": \"#363795\"\n      }\n    ],\n    \"paddingAll\": \"xl\"\n  },\n  \"styles\": {\n    \"footer\": {\n      \"separator\": true\n    }\n  }\n}"
       },
       "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
       "typeVersion": 1,
       "position": [
-        1760,
+        1440,
         176
       ],
-      "id": "a90db3f4-a1ca-46f6-8ee4-8475dc0d1b39",
+      "id": "3ca8bb21-b7f0-4d18-84b4-a19077fddf71",
       "name": "Build Flex Message"
     },
     {
@@ -281,10 +281,10 @@
       "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
       "typeVersion": 1,
       "position": [
-        1760,
+        1440,
         384
       ],
-      "id": "90d58b86-d5ee-46b4-be86-587339f9b185",
+      "id": "844da4a5-32b7-47af-89d0-5ea1e8a549b3",
       "name": "Build Text Message"
     },
     {
@@ -294,10 +294,10 @@
       "type": "n8n-nodes-line-messaging-api.LineMessageBuilder",
       "typeVersion": 1,
       "position": [
-        1760,
+        1440,
         640
       ],
-      "id": "c8eabe14-dece-40d3-ab02-2b228cce95d3",
+      "id": "a3a6b800-c3b5-49a1-a7e7-5c224cc84e0d",
       "name": "Build Text Message1"
     }
   ],
@@ -435,11 +435,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "c574136c-4397-48c3-82bd-e3cdb69bbc49",
+  "versionId": "be1195f4-01f5-4094-a64b-a0d414129fa3",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "e238606eb55c1b14e46c6ef87dc56dbe43d082e5cc6616b4fa0bf5a879726dcc"
+    "instanceId": "2c83110e9bc9eb7ad423f2ae744e8e93845b93107b301cc690bccc2bca83e5f3"
   },
-  "id": "6swv9p58AaDIcIjy",
+  "id": "deezGmUkNtd7UcKA",
   "tags": []
 }

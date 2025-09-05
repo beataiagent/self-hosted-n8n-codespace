@@ -1,0 +1,9 @@
+{
+  "forwardPorts": [80],
+  "portsAttributes": {
+    "80": {
+      "label": "n8n via nginx",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}
